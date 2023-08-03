@@ -41,6 +41,9 @@ DEFAULT_PASSWORD_CHANGE_ALERT_BODY = (
     "If the link is not clickable, try copying and pasting it into your browser."
 )
 
+DEFAULT_END_OF_GAME_SUBJECT = ""
+DEFAULT_END_OF_GAME_BODY = ""
+
 
 def sendmail(addr, text, subject="Message from {ctf_name}"):
     subject = safe_format(subject, ctf_name=get_config("ctf_name"))
