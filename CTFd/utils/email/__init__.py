@@ -41,9 +41,12 @@ DEFAULT_PASSWORD_CHANGE_ALERT_BODY = (
     "If the link is not clickable, try copying and pasting it into your browser."
 )
 
-DEFAULT_END_OF_GAME_SUBJECT = ""
-DEFAULT_END_OF_GAME_BODY = ""
-
+DEFAULT_END_OF_GAME_SUBJECT = "Thank you for participating in {ctf_name}"
+DEFAULT_END_OF_GAME_BODY = (
+    "Thank you for participating in the event! We hope you had a great time and enjoyed the challenges.\n\n"
+    "Stay tuned for more exciting events and competitions in the future.\n\n"
+    "Best regards,\n{ctf_name} Team"
+)
 
 def sendmail(addr, text, subject="Message from {ctf_name}"):
     subject = safe_format(subject, ctf_name=get_config("ctf_name"))
@@ -136,6 +139,17 @@ def user_created_notification(addr, name, password):
     )
     return sendmail(addr=addr, text=text, subject=subject)
 
+def end_of_game_message(email):
+    text = safe_format(
+        get_config("end_of_game_body") or DEFAULT_END_OF_GAME_BODY,
+        ctf_name=get_config("ctf_name"),
+    )
+
+    subject = safe_format(
+        get_config("end_of_game_subject") or DEFAULT_END_OF_GAME_SUBJECT,
+        ctf_name=get_config("ctf_name"),
+    )
+    return sendmail(addr=email, text=text, subject=subject)
 
 def check_email_is_whitelisted(email_address):
     local_id, _, domain = email_address.partition("@")

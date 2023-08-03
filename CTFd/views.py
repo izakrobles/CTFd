@@ -51,6 +51,8 @@ from CTFd.utils.email import (
     DEFAULT_USER_CREATION_EMAIL_SUBJECT,
     DEFAULT_VERIFICATION_EMAIL_BODY,
     DEFAULT_VERIFICATION_EMAIL_SUBJECT,
+    DEFAULT_END_OF_GAME_SUBJECT,
+    DEFAULT_END_OF_GAME_BODY,
 )
 from CTFd.utils.health import check_config, check_database
 from CTFd.utils.helpers import get_errors, get_infos, markup
@@ -221,6 +223,10 @@ def setup():
             # Set up default emails
             set_config("verification_email_subject", DEFAULT_VERIFICATION_EMAIL_SUBJECT)
             set_config("verification_email_body", DEFAULT_VERIFICATION_EMAIL_BODY)
+
+            # Set up Default end of game messages
+            set_config("end_of_game_subject", DEFAULT_END_OF_GAME_SUBJECT)
+            set_config("end_of_game_body", DEFAULT_END_OF_GAME_SUBJECT)
 
             set_config(
                 "successful_registration_email_subject",
